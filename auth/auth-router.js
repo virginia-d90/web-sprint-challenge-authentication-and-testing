@@ -46,7 +46,7 @@ router.post("/login", (req, res) => {
 //create Token
 
 function createToken(payload){
-  const secret = "keep it secret"
+  const secret = process.env.SECRET_JWT || "secret"
 
   const options = {
     expiresIn: '1h'
