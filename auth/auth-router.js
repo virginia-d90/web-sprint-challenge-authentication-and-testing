@@ -25,9 +25,22 @@ router.post('/register', (req, res) => {
     })
 });
 
-router.post('/login', (req, res) => {
-  // implement login
-});
+router.post("/login", (req, res) => {
+  Users.findBy({username: req.body.username})
+      .then(async user => {
+          if(user){
+              if(bcrypt.compareSync(req.body.password, user.password)){
+                  const token = await createToken(user)
+
+                  res.status(200).json({error:false, message: "user successfully logged in", token})
+              } else {
+                  res.status(400).json({error: true, message: "invalid password"})
+              }
+          } else {
+              res.status(400).json({error: true, message: "invalid username"})
+          }
+      })
+})
 
 
 //create Token

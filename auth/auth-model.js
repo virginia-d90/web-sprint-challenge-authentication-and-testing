@@ -4,6 +4,7 @@ module.exports = {
     find,
     findById,
     addUser,
+    findBy
 }
 
 function find(){
@@ -23,4 +24,10 @@ function addUser(user){
     .catch(err => {
         console.log(err)
     })
+}
+
+function findBy(obj){
+    return db('users')
+        .where(obj)
+        .first()
 }
