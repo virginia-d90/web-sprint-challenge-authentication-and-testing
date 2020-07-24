@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
     .then( async user => {
       const token = await createToken(user)
 
-      res.status(200).json({error: false, message: "user created", token})
+      res.status(201).json({error: false, message: "user created", token})
     })
     .catch(err => {
       res.status(400).json({error: true, message: "could not register", err})
